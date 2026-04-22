@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- contact.html - Contact/Feedback Form Page
+       Form validation with JS, success message, recycling mention -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us - EcoSense</title>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="logo">
+        <i class="fas fa-leaf"></i> EcoSense
+      </a>
+      <ul class="nav-menu">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="features.html">Features</a></li>
+        <li><a href="facts.html">Facts</a></li>
+        <li><a href="calculator.html">Calculator</a></li>
+        <li><a href="tips.html">Tips</a></li>
+
+        <li><a href="scanner.html">Scanner</a></li>
+        <li><a href="disposal.html">Disposal</a></li>
+        <li><a href="locations.html">Locations</a></li>
+      </ul>
+
+      <div class="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container">
+    <h1 class="section-title">
+      <i class="fas fa-envelope"></i> Contact & Feedback
+    </h1>
+
+    <!-- Contact Form -->
+    <form id="contactForm" class="contact-form">
+      <div class="form-row">
+        <div class="form-group">
+          <label for="name"><i class="fas fa-user"></i> Full Name:</label>
+          <input type="text" id="name" required>
+        </div>
+        <div class="form-group">
+          <label for="email"><i class="fas fa-envelope"></i> Email:</label>
+          <input type="email" id="email" required>
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <label for="message"><i class="fas fa-comment"></i> Message:</label>
+        <textarea id="message" rows="6" placeholder="Tell us how we can improve or share your eco journey..." required></textarea>
+      </div>
+
+      <button type="submit" class="calculate-btn" style="width: 100%; max-width: 300px; margin: 0 auto; display: block;">
+        Send Message
+      </button>
+    </form>
+  </div>
+
+  <!-- Local Services Section -->
+  <div class="container" style="margin-top: 4rem;">
+    <div class="card" style="text-align: center;">
+      <i class="fas fa-map-marker-alt fa-3x" style="color: var(--primary-green); margin-bottom: 1rem;"></i>
+      <h3>Connect with Local Services</h3>
+      <p>Need help with event waste management? Contact your local recycling centers and waste management authorities for proper disposal and treatment.</p>
+      <p><strong>EcoSense connects you with sustainable solutions!</strong></p>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2024 EcoSense. Mini Project by Student Team. Promoting Sustainability.</p>
+      <div class="social-icons">
+        <a href="#"><i class="fab fa-facebook"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-linkedin"></i></a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Shared Script -->
+  <script src="script.js"></script>
+  
+  <!-- Contact Form JavaScript -->
+  <script>
+    /* Form submission handler with validation using shared function */
+    document.getElementById('contactForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      if (validateForm(this)) {
+        // Simulate form submission (frontend only)
+        showMessage('Thank you! Your message has been sent. We\'ll get back to you soon! 🌿', 'success');
+        
+        // Reset form
+        this.reset();
+        
+        // Scroll to top
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else {
+        showMessage('Please fill all fields correctly, including valid email.', 'error');
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- calculator.html - Carbon Footprint Calculator
+       JS calculator for event footprint with color-coded results and suggestions -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Carbon Footprint Calculator - EcoSense</title>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* Additional calculator styles */
+    .result.green { background: linear-gradient(135deg, #C8E6C9, #A5D6A7); color: #2E7D32; }
+    .result.yellow { background: linear-gradient(135deg, #FFF9C4, #FFECB3); color: #F57C00; }
+    .result.red { background: linear-gradient(135deg, #FFCDD2, #EF9A9A); color: #C62828; }
+    .suggestion { margin-top: 1rem; padding: 1rem; background: rgba(255,255,255,0.8); border-radius: 10px; }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="logo">
+        <i class="fas fa-leaf"></i> EcoSense
+      </a>
+      <ul class="nav-menu">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="features.html">Features</a></li>
+        <li><a href="facts.html">Facts</a></li>
+        <li><a href="calculator.html">Calculator</a></li>
+        <li><a href="tips.html">Tips</a></li>
+
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="scanner.html">Scanner</a></li>
+        <li><a href="disposal.html">Disposal</a></li>
+        <li><a href="locations.html">Locations</a></li>
+      </ul>
+
+      <div class="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container">
+<h1 class="section-title">
+      <i class="fas fa-calculator"></i> Event Impact Calculator
+      <small>(Includes carbon + waste factors)</small>
+    </h1>
+    
+    <div class="calculator-form">
+      <form id="footprintForm">
+        <!-- Number of people -->
+        <div class="form-group">
+          <label for="people"><i class="fas fa-users"></i> Number of People:</label>
+          <input type="number" id="people" min="1" max="1000" value="50" required>
+        </div>
+
+        <!-- Food type -->
+        <div class="form-group">
+          <label for="foodType"><i class="fas fa-utensils"></i> Food Type:</label>
+          <select id="foodType" required>
+            <option value="veg">Vegetarian (Lower Impact)</option>
+            <option value="nonveg">Non-Vegetarian (Higher Impact)</option>
+          </select>
+        </div>
+
+        <!-- Electricity hours -->
+        <div class="form-group">
+          <label for="hours"><i class="fas fa-plug"></i> Electricity Usage (hours):</label>
+          <input type="number" id="hours" min="0" max="24" value="6" required>
+        </div>
+
+        <!-- Transport km -->
+        <div class="form-group">
+          <label for="km"><i class="fas fa-car"></i> Transport Distance (km):</label>
+          <input type="number" id="km" min="0" step="0.1" value="20" required>
+        </div>
+
+        <!-- Plastic items -->
+        <div class="form-group">
+          <label for="plastic"><i class="fas fa-shopping-bag"></i> Single-use Plastic Items:</label>
+          <input type="number" id="plastic" min="0" value="100" required>
+        </div>
+
+        <button type="submit" class="calculate-btn">
+          <i class="fas fa-chart-bar"></i> Calculate My Footprint
+        </button>
+      </form>
+
+      <!-- Results Display -->
+      <div id="result" class="result">
+        <h3 id="scoreTitle"></h3>
+        <div id="scoreValue" style="font-size: 3rem; margin: 1rem 0;"></div>
+        <p id="scoreDesc"></p>
+        <div id="suggestions" class="suggestion"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2024 EcoSense. Mini Project by Student Team. Promoting Sustainability.</p>
+      <div class="social-icons">
+        <a href="#"><i class="fab fa-facebook"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-linkedin"></i></a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+  
+  <!-- Calculator JavaScript -->
+  <script>
+    /* Carbon Footprint Calculator Logic 
+       Formula: people * food_factor + hours*0.5 + km*0.1 + plastic*0.2 */
+    const form = document.getElementById('footprintForm');
+    const resultDiv = document.getElementById('result');
+    
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      if (!validateForm(form)) {
+        showMessage('Please fill all fields correctly!', 'error');
+        return;
+      }
+      
+      // Get values
+      const people = parseFloat(document.getElementById('people').value);
+      const foodType = document.getElementById('foodType').value;
+      const hours = parseFloat(document.getElementById('hours').value);
+      const km = parseFloat(document.getElementById('km').value);
+      const plastic = parseFloat(document.getElementById('plastic').value);
+      
+      // Calculate score (simple beginner-friendly formula)
+      const foodFactor = foodType === 'veg' ? 1 : 2; // Veg lower impact
+      const score = Math.round(people * foodFactor + hours * 0.5 + km * 0.1 + plastic * 0.2);
+      
+      // Display result
+      let level, colorClass, title, desc, suggestions;
+      
+      if (score < 30) {
+        level = 'Low Impact';
+        colorClass = 'green';
+        title = 'Excellent!';
+        desc = `Your event footprint: ${score} kg CO2 equivalent`;
+        suggestions = '🌱 Keep up the great work! Consider zero-waste practices.';
+      } else if (score < 60) {
+        level = 'Moderate Impact';
+        colorClass = 'yellow';
+        title = 'Good Start';
+        desc = `Your event footprint: ${score} kg CO2 equivalent`;
+        suggestions = '⭐ Switch to veg menu and reduce plastic for better score.';
+      } else {
+        level = 'High Impact';
+        colorClass = 'red';
+        title = 'Room for Improvement';
+        desc = `Your event footprint: ${score} kg CO2 equivalent`;
+        suggestions = '⚠️ Reduce meat, plastic, transport. Connect with local recycling!';
+      }
+      
+      // Update DOM
+      document.getElementById('scoreTitle').textContent = title;
+      document.getElementById('scoreValue').textContent = score;
+      document.getElementById('scoreValue').innerHTML += '<span> kg CO₂e</span>';
+      document.getElementById('scoreDesc').textContent = desc;
+      document.getElementById('suggestions').innerHTML = suggestions;
+      
+      resultDiv.className = `result ${colorClass}`;
+      resultDiv.style.display = 'block';
+      
+      showMessage(`Footprint calculated: ${level}`, 'success');
+      
+      // Scroll to result
+      resultDiv.scrollIntoView({ behavior: 'smooth' });
+    });
+  </script>
+</body>
+</html>

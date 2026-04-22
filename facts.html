@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- facts.html - Environmental Facts Page
+       6 facts in JS-powered slider with navigation buttons -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Environmental Facts - EcoSense</title>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="logo">
+        <i class="fas fa-leaf"></i> EcoSense
+      </a>
+      <ul class="nav-menu">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="features.html">Features</a></li>
+        <li><a href="facts.html">Facts</a></li>
+        <li><a href="calculator.html">Calculator</a></li>
+        <li><a href="tips.html">Tips</a></li>
+
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="scanner.html">Scanner</a></li>
+        <li><a href="disposal.html">Disposal</a></li>
+        <li><a href="locations.html">Locations</a></li>
+      </ul>
+
+      <div class="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container">
+    <h1 class="section-title">
+      <i class="fas fa-lightbulb"></i> Eye-Opening Environmental Facts
+    </h1>
+    
+    <!-- Facts Slider -->
+    <div class="slider">
+      <!-- Fact 1 -->
+      <div class="slide active">
+        <i class="fas fa-fire fa-4x" style="color: #FF5722; margin-bottom: 1rem;"></i>
+        <h2>Global Warming Accelerating</h2>
+        <p>The Earth has warmed by 1.1°C since pre-industrial times. We're heading towards 1.5°C within 20 years if emissions continue.</p>
+      </div>
+
+      <!-- Fact 2 -->
+      <div class="slide">
+        <i class="fas fa-fish fa-4x" style="color: #2196F3; margin-bottom: 1rem;"></i>
+        <h2>Plastic in Oceans</h2>
+        <p>8 million tons of plastic enter our oceans every year. By 2050, plastic will outweigh fish in the sea.</p>
+      </div>
+
+      <!-- Fact 3 -->
+      <div class="slide">
+        <i class="fas fa-tree fa-4x" style="color: var(--primary-green); margin-bottom: 1rem;"></i>
+        <h2>Deforestation Crisis</h2>
+        <p>27 soccer fields worth of forest are lost every minute. We lose 10 billion trees annually.</p>
+      </div>
+
+      <!-- Fact 4 -->
+      <div class="slide">
+        <i class="fas fa-cloud-sun fa-4x" style="color: #FF9800; margin-bottom: 1rem;"></i>
+        <h2>Food Waste Impact</h2>
+        <p>1.3 billion tons of food is wasted yearly - equal to 1/3 of all food produced. This creates 8-10% of global emissions.</p>
+      </div>
+
+      <!-- Fact 5 -->
+      <div class="slide">
+        <i class="fas fa-tint fa-4x" style="color: #00BCD4; margin-bottom: 1rem;"></i>
+        <h2>Water Crisis</h2>
+        <p>By 2025, half the world's population will live in water-stressed areas. A single event can waste thousands of liters.</p>
+      </div>
+
+      <!-- Fact 6 -->
+      <div class="slide">
+        <i class="fas fa-recycle fa-4x" style="color: var(--accent-green); margin-bottom: 1rem;"></i>
+        <h2>Recycling Impact</h2>
+        <p>Recycling just half of household waste saves 2,400 pounds of CO2 per household annually. Proper waste management matters!</p>
+      </div>
+    </div>
+
+    <!-- Slider Controls -->
+    <div style="text-align: center; margin-top: 2rem;">
+      <button class="slider-btn" onclick="prevSlide()">
+        <i class="fas fa-chevron-left"></i> Previous
+      </button>
+      <button class="slider-btn" onclick="nextSlide()">
+        Next <i class="fas fa-chevron-right"></i>
+      </button>
+    </div>
+
+    <p style="text-align: center; margin-top: 2rem; color: var(--text-light);">
+      Swipe or click to discover more facts! Every small action counts.
+    </p>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2024 EcoSense. Mini Project by Student Team. Promoting Sustainability.</p>
+      <div class="social-icons">
+        <a href="#"><i class="fab fa-facebook"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-linkedin"></i></a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Shared Script -->
+  <script src="script.js"></script>
+  
+  <!-- Facts Slider JavaScript -->
+  <script>
+    /* Facts Slider - Shows one fact at a time with prev/next buttons */
+    let currentSlide = 0;
+    const totalSlides = 6;
+    
+    function showSlide(index) {
+      // Hide all slides
+      document.querySelectorAll('.slide').forEach(slide => {
+        slide.classList.remove('active');
+      });
+      // Show current
+      document.querySelectorAll('.slide')[index].classList.add('active');
+    }
+    
+    function nextSlide() {
+      currentSlide = (currentSlide + 1) % totalSlides;
+      showSlide(currentSlide);
+    }
+    
+    function prevSlide() {
+      currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+      showSlide(currentSlide);
+    }
+    
+    // Auto-advance every 5 seconds
+    setInterval(nextSlide, 5000);
+    
+    // Keyboard support
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'ArrowRight') nextSlide();
+      if (e.key === 'ArrowLeft') prevSlide();
+    });
+  </script>
+</body>
+</html>

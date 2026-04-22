@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- scanner.html - AI-Based Waste Scanner (Fake AI simulation)
+       Image upload preview, dropdown detection, dynamic results with disposal advice -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Waste Scanner - EcoSense</title>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .scanner-container { max-width: 700px; margin: 2rem auto; }
+    .image-preview { width: 250px; height: 250px; border: 3px dashed var(--primary-green); border-radius: 15px; display: flex; align-items: center; justify-content: center; margin: 1rem auto; background: var(--light-green); }
+    .image-preview img { max-width: 100%; max-height: 100%; border-radius: 10px; }
+    .scan-result { background: var(--white); border-left: 6px solid var(--accent-green); margin-top: 2rem; }
+    .waste-icon { font-size: 4rem; }
+    .disposal-list { list-style: none; }
+    .disposal-list li { padding: 0.8rem; margin: 0.5rem 0; background: var(--light-green); border-radius: 8px; }
+    .scan-btn { background: linear-gradient(135deg, var(--primary-green), #45a049); color: white; border: none; padding: 1.2rem 3rem; font-size: 1.2rem; border-radius: 30px; cursor: pointer; }
+  </style>
+</head>
+<body>
+  <!-- Navigation - Updated with new pages -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="logo">
+        <i class="fas fa-leaf"></i> EcoSense
+      </a>
+      <ul class="nav-menu">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="features.html">Features</a></li>
+        <li><a href="facts.html">Facts</a></li>
+        <li><a href="calculator.html">Calculator</a></li>
+        <li><a href="tips.html">Tips</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="scanner.html">Scanner</a></li>
+        <li><a href="disposal.html">Disposal</a></li>
+        <li><a href="locations.html">Locations</a></li>
+      </ul>
+      <div class="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container">
+    <h1 class="section-title">
+      <i class="fas fa-camera"></i> AI Waste Scanner
+    </h1>
+    
+    <div class="scanner-container">
+      <!-- Upload Section -->
+      <div class="card">
+        <h3>📸 Upload Waste Item Image</h3>
+        <p>Take photo or upload image of waste item. Our AI will identify material and give disposal instructions.</p>
+        
+        <div class="form-group">
+          <label for="wasteImage">Choose Image:</label>
+          <input type="file" id="wasteImage" accept="image/*" required>
+        </div>
+        
+        <div class="image-preview" id="preview">
+          <i class="fas fa-image fa-5x" style="color: var(--text-light);"></i>
+          <p>No image selected</p>
+        </div>
+        
+        <!-- Manual Detection Dropdown for demo -->
+        <div class="form-group">
+          <label for="wasteType">Or Select Waste Type:</label>
+          <select id="wasteType">
+            <option value="">Auto-detect from image</option>
+            <option value="plastic-bottle">Plastic Bottle</option>
+            <option value="glass-jar">Glass Jar</option>
+            <option value="metal-can">Metal Can</option>
+            <option value="paper-box">Paper/Cardboard</option>
+            <option value="e-waste-charger">Mobile Charger (E-waste)</option>
+            <option value="battery">Battery</option>
+          </select>
+        </div>
+        
+        <button type="button" class="scan-btn" onclick="scanWaste()">
+          <i class="fas fa-search"></i> Analyze Waste
+        </button>
+      </div>
+
+      <!-- Results Section (Hidden initially) -->
+      <div id="scanResult" class="card scan-result" style="display: none;">
+        <h3 id="detectedItem">Detected Item</h3>
+        <div id="materialInfo"></div>
+        <div id="disposalAdvice"></div>
+        <a href="locations.html" class="cta-btn" style="margin-top: 1rem; display: inline-block;">
+          <i class="fas fa-map-marker-alt"></i> Find Nearby Centers
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2024 EcoSense. Smart Waste Management Platform. Recycle Right!</p>
+      <div class="social-icons">
+        <a href="#"><i class="fab fa-facebook"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-linkedin"></i></a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+  
+  <!-- Scanner JavaScript - Fake AI Detection -->
+  <script>
+    /* Waste Detection Data - Simple object mapping for fake AI */
+    const wasteData = {
+      'plastic-bottle': {
+        icon: 'fas fa-bottle-water',
+        name: 'Plastic Bottle (PET)',
+        material: 'PET Plastic',
+        impact: 'Takes 450 years to decompose. Made from petroleum.',
+        dont: '❌ Never burn or landfill',
+        do: '♻️ Rinse & recycle in plastic bin',
+        safety: 'Remove cap, crush to save space',
+        centers: 'Accepted at all recycling centers'
+      },
+      'glass-jar': {
+        icon: 'fas fa-wine-glass-alt',
+        name: 'Glass Jar',
+        material: 'Glass',
+        impact: 'Infinitely recyclable without quality loss.',
+        dont: '❌ Don\'t mix with other waste',
+        do: '♻️ Clean & place in glass bin',
+        safety: 'Handle carefully to avoid breakage',
+        centers: 'Glass recycling points'
+      },
+      'metal-can': {
+        icon: 'fas fa-cannabis',
+        name: 'Aluminum Can',
+        material: 'Aluminum Metal',
+        impact: 'Recycling saves 95% energy vs new production.',
+        dont: '❌ Don\'t crush if not clean',
+        do: '♻️ Rinse & recycle metals',
+        safety: 'Dry completely',
+        centers: 'All metal recycling'
+      },
+      'paper-box': {
+        icon: 'fas fa-box',
+        name: 'Cardboard Box',
+        material: 'Paper/Cardboard',
+        impact: 'Can be recycled 5-7 times.',
+        dont: '❌ No food-contaminated paper',
+        do: '♻️ Flatten & recycle paper',
+        safety: 'Remove tape/staples',
+        centers: 'Paper collection'
+      },
+      'e-waste-charger': {
+        icon: 'fas fa-plug',
+        name: 'Mobile Charger',
+        material: 'Electronic Waste (E-waste)',
+        impact: 'Contains hazardous materials like lead.',
+        dont: '❌ NEVER landfill or burn',
+        do: '🔧 E-waste collection centers ONLY',
+        safety: 'Tape ends, store safely',
+        centers: 'E-waste specific centers'
+      },
+      'battery': {
+        icon: 'fas fa-battery-full',
+        name: 'Battery',
+        material: 'Battery (Hazardous)',
+        impact: 'Leaking batteries contaminate soil.',
+        dont: '❌ Never in regular trash',
+        do: '🔋 Battery disposal bins',
+        safety: 'Tape terminals, don\'t puncture',
+        centers: 'Hazardous waste centers'
+      }
+    };
+
+    const imageInput = document.getElementById('wasteImage');
+    const preview = document.getElementById('preview');
+    const wasteTypeSelect = document.getElementById('wasteType');
+    const scanResult = document.getElementById('scanResult');
+
+    // Image Preview
+    imageInput.addEventListener('change', function(e) {
+      const file = e.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          preview.innerHTML = `<img src="${e.target.result}" alt="Preview">`;
+        };
+        reader.readAsDataURL(file);
+        
+        // Simulate detection from filename
+        const filename = file.name.toLowerCase();
+        if (filename.includes('plastic') || filename.includes('bottle')) wasteTypeSelect.value = 'plastic-bottle';
+        else if (filename.includes('glass') || filename.includes('jar')) wasteTypeSelect.value = 'glass-jar';
+        else if (filename.includes('can') || filename.includes('metal')) wasteTypeSelect.value = 'metal-can';
+        else if (filename.includes('paper') || filename.includes('box')) wasteTypeSelect.value = 'paper-box';
+        else if (filename.includes('charger') || filename.includes('cable')) wasteTypeSelect.value = 'e-waste-charger';
+        else if (filename.includes('battery')) wasteTypeSelect.value = 'battery';
+      }
+    });
+
+    function scanWaste() {
+      const selectedType = wasteTypeSelect.value;
+      if (!selectedType) {
+        showMessage('Please upload image or select waste type!', 'error');
+        return;
+      }
+
+      const data = wasteData[selectedType];
+      if (data) {
+        // Update results
+        document.getElementById('detectedItem').innerHTML = `<i class="${data.icon} waste-icon"></i> ${data.name}`;
+        document.getElementById('materialInfo').innerHTML = `
+          <h4>Material: <strong>${data.material}</strong></h4>
+          <p><strong>Impact:</strong> ${data.impact}</p>
+        `;
+        document.getElementById('disposalAdvice').innerHTML = `
+          <h4>🗑️ Disposal Guide:</h4>
+          <ul class="disposal-list">
+            <li><strong>🚫 Don't:</strong> ${data.dont}</li>
+            <li><strong>✅ Do:</strong> ${data.do}</li>
+            <li><strong>⚠️ Safety:</strong> ${data.safety}</li>
+            <li><strong>📍 Centers:</strong> ${data.centers}</li>
+          </ul>
+        `;
+        scanResult.style.display = 'block';
+        scanResult.scrollIntoView({ behavior: 'smooth' });
+        showMessage('Waste analyzed! Follow the disposal guide.', 'success');
+      }
+    }
+
+    // Reset on dropdown change
+    wasteTypeSelect.addEventListener('change', function() {
+      if (!this.value) preview.innerHTML = '<i class="fas fa-image fa-5x" style="color: var(--text-light);"></i><p>No image selected</p>';
+      scanResult.style.display = 'none';
+    });
+  </script>
+</body>
+</html>

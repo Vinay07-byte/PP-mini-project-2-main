@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- tips.html - Eco Tips Page
+       Random tip generator with "Show New Tip" button -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Eco Tips - EcoSense</title>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="logo">
+        <i class="fas fa-leaf"></i> EcoSense
+      </a>
+      <ul class="nav-menu">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="features.html">Features</a></li>
+        <li><a href="facts.html">Facts</a></li>
+        <li><a href="calculator.html">Calculator</a></li>
+        <li><a href="tips.html">Tips</a></li>
+
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="scanner.html">Scanner</a></li>
+        <li><a href="disposal.html">Disposal</a></li>
+        <li><a href="locations.html">Locations</a></li>
+      </ul>
+
+      <div class="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container">
+    <h1 class="section-title">
+      <i class="fas fa-lightbulb"></i> Daily Eco Tips
+    </h1>
+
+    <!-- Tip Display -->
+    <div id="tipDisplay" class="tip-display">
+      <i class="fas fa-seedling fa-4x" style="margin-bottom: 1rem;"></i>
+      <h2>Today's Tip</h2>
+      <p id="currentTip">Click "Show New Tip" to get started!</p>
+      <button id="newTipBtn" class="new-tip-btn">
+        <i class="fas fa-sync-alt"></i> Show New Tip
+      </button>
+    </div>
+
+    <!-- Tips Counter -->
+    <div style="text-align: center; margin-top: 2rem;">
+      <p>💡 You've viewed <span id="tipCount">0</span> tips today. Share with friends!</p>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2024 EcoSense. Mini Project by Student Team. Promoting Sustainability.</p>
+      <div class="social-icons">
+        <a href="#"><i class="fab fa-facebook"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-linkedin"></i></a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Shared Script -->
+  <script src="script.js"></script>
+  
+  <!-- Random Tips JavaScript -->
+  <script>
+    /* Eco Tips Array - 15+ practical tips for daily life and events */
+    const ecoTips = [
+      "🌱 Use reusable plates and cutlery at events instead of single-use plastic",
+      "♻️ Segregate waste at source - separate wet, dry, and hazardous waste",
+      "💡 Switch to LED lights for events - saves 75% energy compared to regular bulbs",
+      "🚫 Avoid plastic water bottles - carry reusable ones for everyone",
+      "🍲 Choose vegetarian menus - 50% lower carbon footprint than meat-heavy",
+      "🌳 Plant a tree for every major event you organize",
+      "🔌 Unplug appliances when not in use - standby power adds up!",
+      "🛒 Use cloth bags instead of plastic shopping bags",
+      "💧 Fix leaking taps - saves 10,000 liters of water per year",
+      "🚲 Encourage carpooling or public transport for event guests",
+      "📱 Turn off mobile data/WiFi when not needed",
+      "♨️ Take shorter showers - saves 50 liters of water per minute",
+      "🗑️ Compost organic kitchen waste instead of throwing in trash",
+      "☀️ Dry clothes in sunlight instead of using dryer",
+      "📦 Use paper bags over plastic for event packaging",
+      "🌍 Support local vendors to reduce transport emissions",
+      "💨 Use fans instead of AC when possible"
+    ];
+    
+    let tipCount = 0;
+    
+    const tipDisplay = document.getElementById('tipDisplay');
+    const currentTip = document.getElementById('currentTip');
+    const newTipBtn = document.getElementById('newTipBtn');
+    const tipCountSpan = document.getElementById('tipCount');
+    
+    function showRandomTip() {
+      const randomIndex = Math.floor(Math.random() * ecoTips.length);
+      currentTip.textContent = ecoTips[randomIndex];
+      
+      tipCount++;
+      tipCountSpan.textContent = tipCount;
+      
+      // Animation
+      tipDisplay.style.transform = 'scale(0.95)';
+      setTimeout(() => {
+        tipDisplay.style.transform = 'scale(1)';
+      }, 150);
+      
+      showMessage('New tip loaded!', 'success');
+    }
+    
+    // Event listeners
+    newTipBtn.addEventListener('click', showRandomTip);
+    
+    // Show first tip on load
+    window.addEventListener('load', showRandomTip);
+  </script>
+</body>
+</html>

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- locations.html - Recycling Centers Directory
+       Dummy centers with cards, waste types -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Recycling Locations - EcoSense</title>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .center-card { border-left: 6px solid var(--accent-green); }
+    .waste-types { font-size: 0.9rem; color: var(--text-light); }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="logo">
+        <i class="fas fa-leaf"></i> EcoSense
+      </a>
+      <ul class="nav-menu">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="features.html">Features</a></li>
+        <li><a href="facts.html">Facts</a></li>
+        <li><a href="calculator.html">Calculator</a></li>
+        <li><a href="tips.html">Tips</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="scanner.html">Scanner</a></li>
+        <li><a href="disposal.html">Disposal</a></li>
+        <li><a href="locations.html">Locations</a></li>
+      </ul>
+      <div class="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container">
+    <h1 class="section-title">
+      <i class="fas fa-map-marker-alt"></i> Nearby Recycling Centers
+    </h1>
+    <p style="text-align: center; margin-bottom: 3rem;">Find local centers for proper waste disposal. Use Scanner first to identify your waste!</p>
+
+    <div class="cards-grid">
+      <!-- Green Earth -->
+      <div class="card center-card">
+        <i class="fas fa-recycle fa-3x" style="color: var(--primary-green);"></i>
+        <h3>Green Earth Recycling Center</h3>
+        <p><strong>📍 123 Green Street, City Center</strong></p>
+        <p><strong>📞 +1-234-567-8901</strong></p>
+        <div class="waste-types">
+          <strong>Accepts:</strong> Plastic, Glass, Metal, Paper
+        </div>
+        <a href="#" class="cta-btn" style="margin-top: 1rem;">Get Directions</a>
+      </div>
+
+      <!-- Eco Waste Hub -->
+      <div class="card center-card">
+        <i class="fas fa-globe fa-3x" style="color: var(--dark-green);"></i>
+        <h3>Eco Waste Solutions Hub</h3>
+        <p><strong>📍 456 Eco Park Road, Industrial Area</strong></p>
+        <p><strong>📞 +1-234-567-8902</strong></p>
+        <div class="waste-types">
+          <strong>Accepts:</strong> E-waste, Batteries, Hazardous, Organic
+        </div>
+        <a href="#" class="cta-btn" style="margin-top: 1rem;">Get Directions</a>
+      </div>
+
+      <!-- City E-Waste -->
+      <div class="card center-card">
+        <i class="fas fa-laptop fa-3x" style="color: #FF9800;"></i>
+        <h3>City E-Waste Collection Point</h3>
+        <p><strong>📍 789 Tech Zone, Near Mall</strong></p>
+        <p><strong>📞 +1-234-567-8903</strong></p>
+        <div class="waste-types">
+          <strong>Accepts:</strong> Electronics, Batteries, Chargers, Gadgets
+        </div>
+        <a href="scanner.html" class="cta-btn" style="margin-top: 1rem;">Scan E-waste</a>
+      </div>
+
+      <!-- Organic Waste -->
+      <div class="card center-card">
+        <i class="fas fa-seedling fa-3x" style="color: var(--accent-green);"></i>
+        <h3>Organic Waste Compost Facility</h3>
+        <p><strong>📍 Park Road Community Center</strong></p>
+        <p><strong>📞 +1-234-567-8904</strong></p>
+        <div class="waste-types">
+          <strong>Accepts:</strong> Food waste, Garden waste, Compostables
+        </div>
+        <a href="#" class="cta-btn" style="margin-top: 1rem;">Get Directions</a>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2024 EcoSense. Find. Scan. Recycle!</p>
+      <div class="social-icons">
+        <a href="#"><i class="fab fa-facebook"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-linkedin"></i></a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

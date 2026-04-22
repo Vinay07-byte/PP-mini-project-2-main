@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ 
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EcoSense - Smart Awareness for a Greener Future</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Supabase Client Library -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <!-- Supabase Configuration -->
+  <script src="supabase-config.js"></script>
+  <!-- Authentication & Database Helpers -->
+  <script src="auth.js"></script>
+  <script src="database.js"></script>
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="logo">
+        <i class="fas fa-leaf"></i> EcoSense
+      </a>
+      <ul class="nav-menu">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="features.html">Features</a></li>
+        <li><a href="facts.html">Facts</a></li>
+        <li><a href="calculator.html">Calculator</a></li>
+        <li><a href="tips.html">Tips</a></li>
+
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="scanner.html">Scanner</a></li>
+        <li><a href="disposal.html">Disposal</a></li>
+        <li><a href="locations.html">Locations</a></li>
+        <li><button id="loginBtn" class="nav-login-btn">Login</button></li>
+      </ul>
+
+      <div class="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <h1>EcoSense</h1>
+    <p>Smart Awareness for a Greener Future</p>
+    <div>
+      <a href="about.html" class="cta-btn">Learn More</a>
+      <a href="calculator.html" class="cta-btn">Calculate Footprint</a>
+    </div>
+  </section>
+
+  <!-- Brief Intro Section -->
+  <section class="container">
+    <div style="text-align: center; max-width: 800px; margin: 0 auto 4rem;">
+      <h2 style="font-size: 2rem; color: var(--dark-green); margin-bottom: 1rem;">Sustainability Starts Here</h2>
+<p>EcoSense - Smart waste management platform. Scan waste with AI, learn proper disposal, find recycling centers, and calculate event footprints.</p>
+    </div>
+  </section>
+
+  <!-- Key Features Section -->
+  <section class="container">
+    <h2 class="section-title">Key Features</h2>
+    <div class="cards-grid">
+      <div class="card">
+        <i class="fas fa-camera"></i>
+        <h3>AI Waste Scanner</h3>
+        <p>Upload waste images for instant material identification and disposal guidance.</p>
+        <a href="scanner.html" class="cta-btn" style="margin-top: 1rem; display: inline-block;">Try Scanner</a>
+      </div>
+      <div class="card">
+        <i class="fas fa-calculator"></i>
+        <h3>Carbon Footprint Calculator</h3>
+        <p>Calculate the environmental impact of your events and daily activities.</p>
+        <a href="calculator.html" class="cta-btn" style="margin-top: 1rem; display: inline-block;">Calculate Now</a>
+      </div>
+      <div class="card">
+        <i class="fas fa-map-marker-alt"></i>
+        <h3>Recycling Centers</h3>
+        <p>Find local recycling centers for plastic, glass, metal, paper, and e-waste.</p>
+        <a href="locations.html" class="cta-btn" style="margin-top: 1rem; display: inline-block;">Find Centers</a>
+      </div>
+      <div class="card">
+        <i class="fas fa-lightbulb"></i>
+        <h3>Eco Tips & Facts</h3>
+        <p>Learn practical tips for waste management and environmental awareness.</p>
+        <a href="tips.html" class="cta-btn" style="margin-top: 1rem; display: inline-block;">Get Tips</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Call to Action Section -->
+  <section style="background: var(--light-green); padding: 4rem 0;">
+    <div class="container" style="text-align: center;">
+      <h2 style="font-size: 2.5rem; color: var(--dark-green); margin-bottom: 1rem;">Join the Green Movement</h2>
+      <p style="font-size: 1.2rem; margin-bottom: 2rem; max-width: 600px; margin-left: auto; margin-right: auto;">Start making a difference today. Use our tools to reduce waste, save energy, and contribute to a sustainable future.</p>
+      <div>
+        <a href="scanner.html" class="cta-btn">Scan Waste</a>
+        <a href="calculator.html" class="cta-btn">Calculate Impact</a>
+        <a href="features.html" class="cta-btn">Explore Features</a>
+      </div>
+    </div>
+  </section>
+    <div class="container">
+      <p>&copy; 2024 EcoSense. Mini Project by Student Team. Promoting Sustainability.</p>
+      <div class="social-icons">
+        <a href="#"><i class="fab fa-facebook"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-linkedin"></i></a>
+      </div>
+    </div>
+  </footer>
+
+
+  <script src="script.js"></script>
+  
+  <script>
+    // Landing page specific JS - Updated for separate login page
+    document.addEventListener('DOMContentLoaded', async function() {
+      const loginBtn = document.getElementById('loginBtn');
+      const userCheck = await getCurrentUser();
+
+      if (userCheck.success && userCheck.user) {
+        // Logged in - show Logout
+        loginBtn.textContent = 'Logout';
+        loginBtn.onclick = async () => {
+          await signOut();
+          window.location.reload();
+        };
+      } else {
+        // Not logged in - link to login.html
+        loginBtn.onclick = () => {
+          window.location.href = 'login.html';
+        };
+      }
+
+      // Animate cards on scroll
+      const cards = document.querySelectorAll('.card');
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.style.opacity = '1';
+            entry.target.style.transform = 'translateY(0)';
+          }
+        });
+      }, { threshold: 0.1 });
+
+      cards.forEach(card => {
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(30px)';
+        card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        observer.observe(card);
+      });
+
+      // Hero animation
+      const hero = document.querySelector('.hero');
+      if (hero) {
+        hero.style.opacity = '0';
+        setTimeout(() => {
+          hero.style.transition = 'opacity 1s ease';
+          hero.style.opacity = '1';
+        }, 100);
+      }
+    });
+  </script>
+
+</body>
+</html>

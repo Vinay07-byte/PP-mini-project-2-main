@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- disposal.html - Proper Disposal Methods Guide
+       Do's/Don'ts cards for 5 waste types -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Disposal Guide - EcoSense</title>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .do-dont-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 2rem; }
+    .do-card { border-left-color: var(--primary-green); }
+    .dont-card { border-left-color: #f44336; }
+    @media (max-width: 768px) { .do-dont-grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="logo">
+        <i class="fas fa-leaf"></i> EcoSense
+      </a>
+      <ul class="nav-menu">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="features.html">Features</a></li>
+        <li><a href="facts.html">Facts</a></li>
+        <li><a href="calculator.html">Calculator</a></li>
+        <li><a href="tips.html">Tips</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="scanner.html">Scanner</a></li>
+        <li><a href="disposal.html">Disposal</a></li>
+        <li><a href="locations.html">Locations</a></li>
+      </ul>
+      <div class="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container">
+    <h1 class="section-title">
+      <i class="fas fa-recycle"></i> Proper Waste Disposal Guide
+    </h1>
+    <p style="text-align: center; margin-bottom: 3rem;">Learn correct disposal methods for different waste types. Scan items first!</p>
+
+    <!-- Waste Types Sections -->
+    <div class="cards-grid">
+      <!-- Plastic -->
+      <div class="card">
+        <i class="fas fa-bottle-water fa-3x"></i>
+        <h3>Plastic Waste</h3>
+        <div class="do-dont-grid">
+          <div class="card do-card">
+            <h4><i class="fas fa-check-circle"></i> DO</h4>
+            <ul>
+              <li>Rinse clean</li>
+              <li>Remove caps</li>
+              <li>Recycle ♻️</li>
+            </ul>
+          </div>
+          <div class="card dont-card">
+            <h4><i class="fas fa-times-circle"></i> DON'T</h4>
+            <ul>
+              <li>Throw in landfill</li>
+              <li>Burn plastics</li>
+              <li>Mix with organic</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Glass -->
+      <div class="card">
+        <i class="fas fa-wine-glass-alt fa-3x"></i>
+        <h3>Glass Waste</h3>
+        <div class="do-dont-grid">
+          <div class="card do-card">
+            <h4><i class="fas fa-check-circle"></i> DO</h4>
+            <ul>
+              <li>Remove metal lids</li>
+              <li>Rinse clean</li>
+              <li>Glass bin ♻️</li>
+            </ul>
+          </div>
+          <div class="card dont-card">
+            <h4><i class="fas fa-times-circle"></i> DON'T</h4>
+            <ul>
+              <li>Break before disposal</li>
+              <li>Mix with plastic</li>
+              <li>Window/mirror glass</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Metal -->
+      <div class="card">
+        <i class="fas fa-cannabis fa-3x"></i>
+        <h3>Metal Waste</h3>
+        <div class="do-dont-grid">
+          <div class="card do-card">
+            <h4><i class="fas fa-check-circle"></i> DO</h4>
+            <ul>
+              <li>Rinse food residue</li>
+              <li>Flatten cans</li>
+              <li>Metal recycling ♻️</li>
+            </ul>
+          </div>
+          <div class="card dont-card">
+            <h4><i class="fas fa-times-circle"></i> DON'T</h4>
+            <ul>
+              <li>Aerosol cans with gas</li>
+              <li>Motor oil containers</li>
+              <li>Mix with paper</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- E-Waste -->
+      <div class="card">
+        <i class="fas fa-laptop fa-3x" style="color: #FF9800;"></i>
+        <h3>E-Waste (Electronics)</h3>
+        <div class="do-dont-grid">
+          <div class="card do-card">
+            <h4><i class="fas fa-check-circle"></i> DO</h4>
+            <ul>
+              <li>E-waste centers ONLY</li>
+              <li>Tape cable ends</li>
+              <li>Certified recyclers</li>
+            </ul>
+          </div>
+          <div class="card dont-card">
+            <h4><i class="fas fa-times-circle"></i> DON'T</h4>
+            <ul>
+              <li>Landfill/regular trash</li>
+              <li>Burn electronics</li>
+              <li>Donate broken items</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Organic -->
+      <div class="card">
+        <i class="fas fa-seedling fa-3x"></i>
+        <h3>Organic Waste</h3>
+        <div class="do-dont-grid">
+          <div class="card do-card">
+            <h4><i class="fas fa-check-circle"></i> DO</h4>
+            <ul>
+              <li>Compost food waste</li>
+              <li>Garden waste compost</li>
+              <li>Vermicomposting</li>
+            </ul>
+          </div>
+          <div class="card dont-card">
+            <h4><i class="fas fa-times-circle"></i> DON'T</h4>
+            <ul>
+              <li>Mix with recyclables</li>
+              <li>Plastic-lined waste</li>
+              <li>Landfill organic</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="text-align: center; margin-top: 3rem;">
+      <a href="scanner.html" class="cta-btn">
+        <i class="fas fa-camera"></i> Scan Your Waste
+      </a>
+      <a href="locations.html" class="cta-btn">
+        <i class="fas fa-map-marker-alt"></i> Find Centers
+      </a>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2024 EcoSense. Dispose Right. Recycle Right!</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
